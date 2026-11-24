@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 
+from app.carry.store import CarryStore
 from app.intake.schema import HEADER
 from app.main import create_app
 from app.review.store import Store
@@ -35,3 +36,8 @@ def client(tmp_path):
 @pytest.fixture
 def store(tmp_path):
     return Store(tmp_path / "runs.db")
+
+
+@pytest.fixture
+def carries(tmp_path):
+    return CarryStore(tmp_path / "runs.db")

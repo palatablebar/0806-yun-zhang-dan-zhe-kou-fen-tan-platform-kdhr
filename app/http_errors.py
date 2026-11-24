@@ -17,6 +17,14 @@ LABELS = {
     "UNRESOLVED_ISSUES": "存在待处理差异",
     "SAMPLE_UNKNOWN": "样例不存在",
     "STAGE_UNKNOWN": "处理阶段不存在",
+    "RUN_NOT_CLOSED": "账期未关账，不能结转",
+    "CARRY_NOT_FOUND": "结转批次不存在",
+    "CARRY_FINALIZED": "下月批次已签发，不能改写",
+    "CARRY_BLOCKED": "存在超额或额度缺失，整批阻断",
+    "CARRY_EMPTY": "没有可结转的账户行",
+    "OVER_CAP": "账户已签发分摊超过账户额度",
+    "CAP_MISSING": "账户额度缺失",
+    "POOL_MISSING": "折扣池缺失",
 }
 
 
@@ -24,11 +32,25 @@ def response(error):
     code = error.code
     status = (
         404
-        if code in {"RUN_NOT_FOUND", "SAMPLE_UNKNOWN", "STAGE_UNKNOWN"}
+        if code in {"RUN_NOT_FOUND", "SAMPLE_UNKNOWN", "STAGE_UNKNOWN", "CARRY_NOT_FOUND"}
         else (
             409
-            if code in {"STALE_REVIEW", "RUN_FINALIZED", "UNRESOLVED_ISSUES"}
-            else 413 if code == "FILE_TOO_LARGE" else 422
+            if code
+            in {
+                "STALE_REVIEW",
+                "RUN_FINALIZED",
+                "UNRESOLVED_ISSUES",
+                "RUN_NOT_CLOSED",
+                "CARRY_FINALIZED",
+            }
+            else (
+                413
+                if code == "FILE_TOO_LARGE"
+                else 422
+            )
         )
     )
-    return jsonify(code=code, message=LABELS.get(code, code)), status
+    payload = {"code": code, "message": LABELS.get(code, code)}
+    if getattr(error, "details", None):
+        payload["blocked"] = error.details
+    return jsonify(payload), status

@@ -38,6 +38,10 @@ body.ledger {margin:0;background:var(--bg);color:var(--ink);font:var(--size)/1.5
 .ledger .review-actions {display:flex;gap:6px;margin:8px 0}
 .ledger .statusbar {grid-area:statusbar;display:flex;gap:14px;justify-content:space-between;border-top:1px solid var(--line);padding:10px 0}
 .ledger [data-failure="true"] {color:var(--alert)}
+.ledger .carry-box {border-top:1px solid var(--line);margin-top:12px;padding-top:10px}
+.ledger .carry-box h3 {font-size:14px;margin:0 0 8px}
+.ledger #carry-status {font-size:.92em;color:var(--sub);overflow-wrap:anywhere;margin:8px 0 0}
+.ledger #carry-status[data-failure="true"] {color:var(--alert)}
 .ledger .mast {border-block: 3px double var(--accent)}
 .ledger .results tr:nth-child(even) {background:var(--bg)}
 .ledger .badge{border-bottom:1px dashed}

@@ -1,0 +1,7 @@
+record,case,kind,usage_units,discount_cents,cap_cents,note
+000201,0002,pool,0,9,9,交接明细
+000202,0002,usage,2,0,6,复核底稿
+000203,0002,usage,1,0,5,补录记录
+000501,0005,pool,0,12,12,补录折扣池
+000502,0005,usage,2,0,8,补录新增账户
+000503,0005,usage,1,0,4,补录新增账户

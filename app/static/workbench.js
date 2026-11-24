@@ -1,6 +1,7 @@
 import {request} from './client.js';
 import {snapshot, history} from './view.js';
 import {visualize} from './plots.js';
+import {bindCarry, resetCarry} from './carry.js';
 
 const form = document.querySelector('#source');
 const file = document.querySelector('#file');
@@ -36,6 +37,9 @@ function draw() {
     detail.querySelector('[value="APPROVED"]').disabled = !report.balance.releasable || batch.status==='APPROVED';
     detail.querySelector('[value="HELD"]').disabled = batch.status==='APPROVED';
     evidence.href = `/api/runs/${batch.id}/evidence`;
+    bindCarry(batch);
+  } else {
+    resetCarry();
   }
 }
 

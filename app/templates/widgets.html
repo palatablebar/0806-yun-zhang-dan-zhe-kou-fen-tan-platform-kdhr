@@ -39,6 +39,17 @@
     <textarea id="note" name="note" minlength="3" maxlength="200" required></textarea>
     <div class="review-actions"><button name="decision" value="HELD">暂缓</button><button class="action" name="decision" value="APPROVED">签发</button></div>
     <a id="evidence">下载复核证据</a>
+    <div class="carry-box">
+      <h3>下月结转批次</h3>
+      <div class="review-actions">
+        <button type="button" id="carry-create">结转下月</button>
+        <button type="button" id="carry-supplement">补录来源</button>
+        <button type="button" class="action" id="carry-issue">签发下月批次</button>
+      </div>
+      <input id="carry-file" type="file" accept=".csv,text/csv" hidden>
+      <a id="carry-evidence" hidden>下载结转证据</a>
+      <p id="carry-status" aria-live="polite"></p>
+    </div>
   </form>
 </aside>
 {% endmacro %}
